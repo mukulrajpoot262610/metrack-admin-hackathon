@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from '../../services/api'
+// import { logout } from '../../services/api'
 import { setAuth } from '../../redux/authSlice'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
@@ -26,7 +26,7 @@ const Sidebar = () => {
         <div className='fixed z-50 h-full w-2/12 bg-black flex justify-start items-center flex-col'>
             <div className="mt-12">
                 <Image src='/logo.svg' height={100} width={100} alt="" objectFit="contain" />
-                <h1 className="font-bold text-white">MentorMap</h1>
+                <h1 className="font-bold text-white">METrack</h1>
             </div>
 
             <ul className="menu w-full mt-8 p-3 text-white rounded-box bg-black">
@@ -38,14 +38,6 @@ const Sidebar = () => {
                         <a className='flex justify-between'>
                             Home
                             <i className="fa-solid fa-house"></i>
-                        </a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/orders" passHref>
-                        <a className='flex justify-between'>
-                            Orders
-                            <i className="fa-solid fa-clipboard"></i>
                         </a>
                     </Link>
                 </li>

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { logout } from '../../services/api'
+// import { logout } from '../../services/api'
 
 const Navbar = () => {
 
@@ -48,14 +48,7 @@ const Navbar = () => {
                                 </a>
                             </Link>
                         </li>
-                        <li>
-                            <Link href="/orders" passHref>
-                                <a className='flex justify-between'>
-                                    Orders
-                                    <i className="fa-solid fa-clipboard"></i>
-                                </a>
-                            </Link>
-                        </li>
+
                         <li>
                             <Link href="/course" passHref>
                                 <a className='flex justify-between'>
