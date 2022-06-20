@@ -46,7 +46,7 @@ export default function Course() {
         title="Confirm Deletion"
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        setConfirm={deleteCourse}
+        onConfirm={deleteCourse}
       />
     </div>
   );

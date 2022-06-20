@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setAuth } from "../../redux/authSlice";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { logout } from "../../services/api";
 
 const Sidebar = () => {
   const router = useRouter();

@@ -58,7 +58,7 @@ export default function Enrolled() {
 
   const rows = data.map((i, j) => {
     return (
-      <tr>
+      <tr key={j}>
         <th>
           <label>
             <input type="checkbox" className="checkbox" />

@@ -3,7 +3,7 @@ import React from "react";
 export default function Stats() {
   return (
     <div className="flex items-center justify-center mx-auto">
-      <div className="shadow stats">
+      <div className="shadow stats bg-base-300">
         <div className="stat">
           <div className="stat-figure text-primary">
             <svg

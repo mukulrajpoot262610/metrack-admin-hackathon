@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -6,10 +6,24 @@ import Sidebar from "./Sidebar";
 import Loader from "./Loader";
 import { useLoadingWithRefresh } from "../../hooks/useLoadingWithRefresh";
 import { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../redux/authSlice";
+import { refresh } from "../../services/api";
 
 const Layout = ({ children }) => {
   const router = useRouter();
   const { loading } = useLoadingWithRefresh();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await refresh();
+        console.log({ data });
+        dispatch(setAuth(data));
+      } catch (err) {}
+    })();
+  }, []);
 
   return loading ? (
     <Loader />

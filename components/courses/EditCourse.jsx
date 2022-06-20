@@ -12,7 +12,7 @@ export default function EditCourse() {
             id="title"
             type="text"
             placeholder="title"
-            class="custom-input"
+            className="custom-input"
           />
         </div>
         <div>
@@ -23,7 +23,7 @@ export default function EditCourse() {
             id="title"
             type="text"
             placeholder="title"
-            class="custom-textarea"
+            className="custom-textarea"
           />
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -44,7 +44,7 @@ export default function EditCourse() {
             id="title"
             type="number"
             placeholder="title"
-            class="custom-input"
+            className="custom-input"
           />
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -56,7 +56,7 @@ export default function EditCourse() {
               id="title"
               type="text"
               placeholder="title"
-              class="custom-input"
+              className="custom-input"
             />
           </div>
           <div>
@@ -67,7 +67,7 @@ export default function EditCourse() {
               id="title"
               type="number"
               placeholder="title"
-              class="custom-input"
+              className="custom-input"
             />
           </div>
           <div>
@@ -78,7 +78,7 @@ export default function EditCourse() {
               id="title"
               type="text"
               placeholder="title"
-              class="custom-input"
+              className="custom-input"
             />
           </div>
           <div>
@@ -89,7 +89,7 @@ export default function EditCourse() {
               id="title"
               type="text"
               placeholder="title"
-              class="custom-input"
+              className="custom-input"
             />
           </div>
           <div>
@@ -100,7 +100,7 @@ export default function EditCourse() {
               id="title"
               type="select"
               placeholder="title"
-              class="custom-input"
+              className="custom-input"
             />
           </div>
         </div>
