@@ -1,61 +1,7 @@
 import React from "react";
 
-export default function Table() {
-  const data = [
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-  ];
-
+export default function Table({ data, loading }) {
+  console.log(data);
   const rows = data.map((i, j) => {
     return (
       <tr>
