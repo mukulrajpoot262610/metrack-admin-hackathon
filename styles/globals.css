@@ -1,9 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+.custom-input {
+  @apply input w-full input-bordered bg-base-300;
+}
+
+.custom-label {
+  @apply block mb-2 text-sm font-bold text-accent;
+}
+
+.custom-textarea {
+  @apply textarea w-full h-80 textarea-bordered bg-base-300;
 }
