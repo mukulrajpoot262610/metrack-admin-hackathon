@@ -10,55 +10,11 @@ export default function Table() {
       name: "John Doe",
       email: "johndoe@gmail.com",
     },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
   ];
 
   const rows = data.map((i, j) => {
     return (
-      <tr>
+      <tr key={j}>
         <th>
           <label>
             <input type="checkbox" className="checkbox" />

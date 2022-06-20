@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-// import { login } from '../services/api';
+import { login } from '../services/api';
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../redux/authSlice';
 
@@ -16,8 +16,6 @@ const Login = () => {
   const [toggelFieldType, setToggleFieledType] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const redirect = router.query.redirect
-
   const onSubmit = async (payload) => {
     setLoading(true)
     try {
@@ -25,7 +23,7 @@ const Login = () => {
       dispatch(setAuth(data))
       setLoading(false)
       toast.success('Login Successfull')
-      redirect ? router.replace(`/${redirect}`) : router.replace('/account')
+      router.replace('/account')
     } catch (err) {
       setLoading(false)
       console.log(err)
