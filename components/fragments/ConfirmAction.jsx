@@ -5,15 +5,15 @@ export function ConfirmAction({
   title = "Confirm Action",
   isOpen,
   setIsOpen,
-  setConfirm,
+  onConfirm,
 }) {
   function closeModal() {
     setIsOpen(false);
   }
 
   const handleConfirm = (e) => {
-    setConfirm(true);
     setIsOpen(false);
+    onConfirm();
   };
 
   return (

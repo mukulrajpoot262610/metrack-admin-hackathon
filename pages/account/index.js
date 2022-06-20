@@ -11,7 +11,7 @@ const Account = () => {
     const fetchData = async () => {
       try {
         // const { data } = await GetStats()
-        setStats(data);
+        // setStats(data);
       } catch (err) {
         console.log(err);
       }

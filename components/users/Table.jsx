@@ -1,7 +1,8 @@
 import React from "react";
+import toast from "react-hot-toast";
+import { deleteUser } from "../../services/api";
 
-export default function Table({ data, loading }) {
-  console.log(data);
+export default function Table({ data, handleDelete, loading }) {
   const rows = data.map((i, j) => {
     return (
       <tr>
@@ -24,15 +25,30 @@ export default function Table({ data, loading }) {
           </div>
         </td>
         <td>
-          Zemlak, Daniel and Leannon
+          User since 1949
           <br />
-          <span className="badge badge-ghost badge-sm">
-            Desktop Support Technician
+          <span
+            className={`badge badge-sm ${
+              i?.role > 1 ? "badge-success" : "badge-ghost"
+            }`}
+          >
+            {i?.role > 1 ? "admin" : "user"}
           </span>
         </td>
-        <td>Purple</td>
+        <td>
+          {i?.verified ? (
+            <p className="font-bold text-green-500">verified</p>
+          ) : (
+            <p>unverified</p>
+          )}
+        </td>
         <th>
-          <button className="btn btn-ghost btn-xs">details</button>
+          <button
+            onClick={() => handleDelete(i._id)}
+            className="btn btn-error btn-xs"
+          >
+            delete
+          </button>
         </th>
       </tr>
     );
@@ -50,8 +66,8 @@ export default function Table({ data, loading }) {
                 </label>
               </th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Role</th>
+              <th>Verification</th>
               <th></th>
             </tr>
           </thead>

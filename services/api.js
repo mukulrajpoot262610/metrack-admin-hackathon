@@ -11,6 +11,7 @@ const api = axios.create({
 });
 
 // AUTH
+export const refresh = () => api.get("/api/refresh");
 export const sendPasswordResetLink = (data) =>
   api.post("/api/forget-password", data);
 export const setNewPassword = (data) => api.post("/api/reset-password", data);
@@ -19,6 +20,7 @@ export const logout = () => api.post("/api/admin/logout");
 
 // USER
 export const getUsers = (data) => api.post("/api/admin/get-users", data);
+export const deleteUser = (id) => api.delete(`/api/admin/delete-user/${id}`);
 
 api.interceptors.response.use(
   (config) => {
@@ -34,12 +36,9 @@ api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/admin-refresh`,
-          {
-            withCredentials: true,
-          }
-        );
+        await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/refresh`, {
+          withCredentials: true,
+        });
         return api.request(originalRequest);
       } catch (err) {
         console.log(err);

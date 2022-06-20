@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { getUsers } from "../../services/api";
+import { deleteUser, getUsers } from "../../services/api";
+import { ConfirmAction } from "../fragments/ConfirmAction";
 import Table from "./Table";
 
 const Users = () => {
@@ -9,6 +10,8 @@ const Users = () => {
   const [verifiedUsers, setVerifiedUsers] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [filter, setFilter] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [deletionId, setDeletionId] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -27,9 +30,23 @@ const Users = () => {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log(filter, "filter is this");
-  }, [filter]);
+  const handleDelete = (id) => {
+    setIsOpen(true);
+    setDeletionId(id);
+  };
+
+  const onDelete = async (id) => {
+    try {
+      console.log({ id });
+      const res = await deleteUser(id);
+      toast.success(res?.data?.msg);
+      setDeletionId(null);
+      setUsers((users) => users.filter((i) => i._id != deletionId));
+    } catch (err) {
+      setDeletionId(null);
+      toast.error(err?.response?.data?.msg);
+    }
+  };
 
   useEffect(() => {
     if (!users?.length) return;
@@ -59,10 +76,17 @@ const Users = () => {
           </section>
         </div>
         <Table
+          handleDelete={handleDelete}
           data={filter == 0 ? users : filter == 1 ? verifiedUsers : admins}
           loading={loading}
         />
       </div>
+      <ConfirmAction
+        title="Confirm Deletion"
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onConfirm={() => onDelete(deletionId)}
+      />
     </>
   );
 };
