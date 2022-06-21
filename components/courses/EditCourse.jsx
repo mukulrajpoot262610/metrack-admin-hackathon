@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { addCourses } from "../../services/api";
+import { addCourses, editCourses } from "../../services/api";
 import Link from "next/dist/client/link";
+import { useRouter } from "next/router";
 
 export default function EditCourse({ course }) {
 
+  const router = useRouter()
   const [name, setName] = useState(course?.name)
   const [description, setDescription] = useState(course?.description)
   const [channelImage, setChannelImage] = useState(course?.channelImage)
   const [thumbnail, setThumbnail] = useState(course?.thumbnail)
   const [video, setVideo] = useState(course?.video)
   const [channel, setChannel] = useState(course?.channel)
-  const [tags, setTags] = useState(course?.tags)
+  const [tags, setTags] = useState(course?.tags.join(","))
   const [level, setLevel] = useState(course?.level)
 
   const handleSubmit = async (e) => {
@@ -28,7 +30,23 @@ export default function EditCourse({ course }) {
     try {
       const { data } = await addCourses(payload)
       toast.success('Course Created 🎉')
-      console.log(data)
+      router.replace(`/courses/${data.data._id}`)
+    } catch (err) {
+      console.log(err)
+      toast.error(err?.response?.data?.msg)
+    }
+  }
+
+  const handleEdit = async (e) => {
+    e.preventDefault()
+    const payload = {
+      id: course._id, name, description, channelImage, thumbnail, video, channel, tags, level
+    }
+
+    try {
+      const { data } = await editCourses(payload)
+      toast.success('Course Edited 🎉')
+      router.replace(`/courses/${course._id}`)
     } catch (err) {
       console.log(err)
       toast.error(err?.response?.data?.msg)
@@ -59,7 +77,7 @@ export default function EditCourse({ course }) {
       <header className="max-w-5xl mx-auto mb-4">
         <h1 className="uppercase font-bold text-xl">{course ? "Edit" : "ADD"} Course</h1>
       </header>
-      <form onSubmit={handleSubmit} className="max-w-5xl mx-auto space-y-4">
+      <form onSubmit={course ? handleEdit : handleSubmit} className="max-w-5xl mx-auto space-y-4">
         <div>
           <label htmlFor="name" className="custom-label">
             Name
@@ -175,8 +193,10 @@ export default function EditCourse({ course }) {
           </div>
         </div>
         <div className="flex items-end justify-end gap-4 py-8">
-          <button className="btn btn-primary">Publish</button>
-          <button className="btn btn-warning">Cancel</button>
+          <button type="submit" className="btn btn-primary">Save</button>
+          <Link href={`/courses/${course?._id}`}>
+            <div className="btn btn-warning">Cancel</div>
+          </Link>
         </div>
       </form>
     </div>
