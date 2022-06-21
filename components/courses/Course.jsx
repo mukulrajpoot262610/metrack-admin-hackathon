@@ -1,20 +1,25 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import toast, { LoaderIcon } from "react-hot-toast";
+import { deleteCourse } from "../../services/api";
 import { ConfirmAction } from "../fragments/ConfirmAction";
 import Enrolled from "./Enrolled";
 import Stats from "./Stats";
+import { useRouter } from 'next/router'
 
 export default function Course({ course, loading }) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter()
 
-  const handleDelete = (e) => {
-    e.preventDefault();
-    setIsOpen(true);
-  };
-
-  const deleteCourse = () => {
-    toast("deleted");
+  const handleDelete = async (e) => {
+    try {
+      const { data } = await deleteCourse(course._id)
+      toast.success('Course Deleted')
+      router.replace('/courses')
+    } catch (err) {
+      console.log(err)
+      toast.error(err.response?.data?.msg)
+    }
   };
 
   return (
@@ -51,7 +56,7 @@ export default function Course({ course, loading }) {
                   <button className="btn btn-warning">edit</button>
                 </Link>
                 <button className="btn btn-primary">publish</button>
-                <button onClick={handleDelete} className="btn btn-error">
+                <button onClick={(e) => setIsOpen(true)} className="btn btn-error">
                   delete
                 </button>
               </div>
@@ -76,7 +81,7 @@ export default function Course({ course, loading }) {
             title="Confirm Deletion"
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            onConfirm={deleteCourse}
+            onConfirm={handleDelete}
           />
         </div>
       }

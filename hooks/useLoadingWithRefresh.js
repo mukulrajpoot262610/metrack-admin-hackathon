@@ -19,7 +19,7 @@ export function useLoadingWithRefresh() {
         dispatch(setAuth(data));
         setLoading(false);
       } catch (err) {
-        console.log(err.message);
+        console.warn(err.message);
         setLoading(false);
       }
     })();

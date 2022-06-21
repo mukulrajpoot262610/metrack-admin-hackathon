@@ -16,7 +16,8 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       const { data } = await logout();
-      dispatch(setAuth(data));
+      console.log(data)
+      dispatch(setAuth({ data: null }));
       toast.success("Logout Successfull");
       router.replace("/");
     } catch (err) {
