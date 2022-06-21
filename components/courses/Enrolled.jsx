@@ -1,51 +1,7 @@
 import React from "react";
 
-export default function Enrolled() {
+export default function Enrolled({ students }) {
   const data = [
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
     {
       name: "John Doe",
       email: "johndoe@gmail.com",
@@ -68,7 +24,7 @@ export default function Enrolled() {
           <div className="flex items-center space-x-3">
             <div className="avatar">
               <div className="w-12 h-12 mask mask-squircle">
-                <img src="avatar.svg" alt="Avatar Tailwind CSS Component" />
+                <img src="/avatar.svg" alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
             <div>

@@ -23,7 +23,9 @@ export const getUsers = (data) => api.post("/api/admin/get-users", data);
 export const deleteUser = (id) => api.delete(`/api/admin/delete-user/${id}`);
 
 // COURSES
-export const getCourses = (data) => api.get("/api/admin/get-courses", data);
+export const getCourses = () => api.get("/api/admin/get-all-course");
+export const getCourse = (id) => api.get(`/api/admin/get-course/${id}`);
+export const addCourses = (data) => api.post("/api/admin/add-courses", data);
 
 api.interceptors.response.use(
   (config) => {

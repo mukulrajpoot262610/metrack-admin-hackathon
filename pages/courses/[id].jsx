@@ -1,10 +1,10 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import toast, { LoaderIcon } from "react-hot-toast";
-import EditCourse from "../../../components/courses/EditCourse";
-import { getCourse } from "../../../services/api";
-import { useRouter } from "next/dist/client/router";
+import toast from "react-hot-toast";
+import Course from "../../components/courses/Course";
+import { getCourse } from "../../services/api";
 
-export default function Edit() {
+export default function CourseDetail() {
 
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState();
@@ -24,16 +24,12 @@ export default function Edit() {
         setLoading(false);
       }
     };
-
-    id && getData();
-
+    getData();
   }, [id]);
 
   return (
     <>
-      {
-        id ? (loading ? <div className="flex justify-center items-center min-h-screen w-full"><LoaderIcon /></div> : <EditCourse course={course} />) : <EditCourse />
-      }
+      <Course course={course} loading={loading} />
     </>
   );
 }
