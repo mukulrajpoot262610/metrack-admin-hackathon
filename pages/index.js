@@ -46,10 +46,11 @@ const Login = () => {
       </Head>
 
       <div className="flex flex-col items-center justify-center">
+        <img src="404.svg" className="h-64" />
         <div className="flex w-11/12 rounded-lg shadow-lg lg:w-6/12 h-3/5">
           <div className="w-full p-4 lg:p-10">
             <h1 className="mb-6 text-3xl font-bold text-center">
-              MEtrack Admin Login
+              ME-Track Admin Login
             </h1>
             <form className="h-full" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
