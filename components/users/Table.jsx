@@ -1,6 +1,4 @@
 import React from "react";
-import toast from "react-hot-toast";
-import { deleteUser } from "../../services/api";
 
 export default function Table({ data, handleDelete, loading }) {
   const rows = data.map((i, j) => {
