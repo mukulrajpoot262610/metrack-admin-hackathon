@@ -5,11 +5,10 @@ import { getCourse } from "../../../services/api";
 import { useRouter } from "next/dist/client/router";
 
 export default function Edit() {
-
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState();
-  const router = useRouter()
-  const id = router.query.id
+  const router = useRouter();
+  const id = router.query.id;
 
   useEffect(() => {
     const getData = async () => {
@@ -26,14 +25,21 @@ export default function Edit() {
     };
 
     id && getData();
-
   }, [id]);
 
   return (
     <>
-      {
-        id ? (loading ? <div className="flex justify-center items-center min-h-screen w-full"><LoaderIcon /></div> : <EditCourse course={course} />) : <EditCourse />
-      }
+      {id ? (
+        loading ? (
+          <div className="flex justify-center items-center min-h-screen w-full">
+            <LoaderIcon />
+          </div>
+        ) : (
+          <EditCourse course={course} edit={true} />
+        )
+      ) : (
+        <EditCourse edit={false} />
+      )}
     </>
   );
 }

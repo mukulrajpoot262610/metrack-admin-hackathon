@@ -4,31 +4,47 @@ import toast, { LoaderIcon } from "react-hot-toast";
 import { ConfirmAction } from "../fragments/ConfirmAction";
 import Enrolled from "./Enrolled";
 import Stats from "./Stats";
+import { deleteCourse } from "../../services/api";
+import { useRouter } from "next/router";
 
 export default function Course({ course, loading }) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const handleDelete = (e) => {
     e.preventDefault();
     setIsOpen(true);
   };
 
-  const deleteCourse = () => {
-    toast("deleted");
+  const onDelete = async (id) => {
+    try {
+      const response = await deleteCourse(id);
+      toast("course deleted");
+      router.push("/courses");
+    } catch (err) {
+      toast(err?.response?.data?.msg);
+    }
   };
 
   return (
     <>
-      {
-        loading ? <div className="flex justify-center items-center min-h-screen w-full"><LoaderIcon /></div> : <div className="p-4">
-
+      {loading ? (
+        <div className="flex justify-center items-center min-h-screen w-full">
+          <LoaderIcon />
+        </div>
+      ) : (
+        <div className="p-4">
           <div className="breadcrumbs mb-4 mx-2 uppercase font-bold text-xs">
             <ul>
-              <Link href={'/account'}>
-                <li><a>Home</a></li>
+              <Link href={"/account"}>
+                <li>
+                  <a>Home</a>
+                </li>
               </Link>
               <Link href={`/courses`}>
-                <li><a>Courses</a></li>
+                <li>
+                  <a>Courses</a>
+                </li>
               </Link>
               <li>{course?.name}</li>
             </ul>
@@ -40,11 +56,14 @@ export default function Course({ course, loading }) {
             </div>
             <div id="content" className="flex flex-col flex-1">
               <h1 className="text-3xl font-extrabold">{course?.name}</h1>
-              <p className="pt-4 text-sm">
-                {course?.description}
-              </p>
+              <p className="pt-4 text-sm">{course?.description}</p>
               <div className="flex pb-4 pt-2">
-                {course?.tags.map((e, i) => <p key={i} className="text-2xs uppercase mr-2 font-bold"> #{e.trim()}</p>)}
+                {course?.tags.map((e, i) => (
+                  <p key={i} className="text-2xs uppercase mr-2 font-bold">
+                    {" "}
+                    #{e.trim()}
+                  </p>
+                ))}
               </div>
               <div className="flex items-end justify-end flex-1 gap-4">
                 <Link href={`/courses/edit?id=${course?._id}`}>
@@ -76,11 +95,12 @@ export default function Course({ course, loading }) {
             title="Confirm Deletion"
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            onConfirm={deleteCourse}
+            onConfirm={() => {
+              onDelete(course._id);
+            }}
           />
         </div>
-      }
-
+      )}
     </>
   );
 }

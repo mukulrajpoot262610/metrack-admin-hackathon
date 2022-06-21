@@ -1,55 +1,92 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { addCourses } from "../../services/api";
+import { addCourses, editCourse } from "../../services/api";
 import Link from "next/dist/client/link";
+import { useRouter } from "next/router";
 
-export default function EditCourse({ course }) {
+export default function EditCourse({ course, edit }) {
+  const [name, setName] = useState(course?.name);
+  const [description, setDescription] = useState(course?.description);
+  const [channelImage, setChannelImage] = useState(course?.channelImage);
+  const [thumbnail, setThumbnail] = useState(course?.thumbnail);
+  const [video, setVideo] = useState(course?.video);
+  const [channel, setChannel] = useState(course?.channel);
+  const [tags, setTags] = useState(course?.tags);
+  const [level, setLevel] = useState(course?.level);
 
-  const [name, setName] = useState(course?.name)
-  const [description, setDescription] = useState(course?.description)
-  const [channelImage, setChannelImage] = useState(course?.channelImage)
-  const [thumbnail, setThumbnail] = useState(course?.thumbnail)
-  const [video, setVideo] = useState(course?.video)
-  const [channel, setChannel] = useState(course?.channel)
-  const [tags, setTags] = useState(course?.tags)
-  const [level, setLevel] = useState(course?.level)
+  const router = useRouter();
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    edit && router.push(`/courses/${course?._id}`);
+    !edit && router.push("/courses");
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!name || !description || !channelImage || !thumbnail || !video || !channel || !tags || !level) {
-      return toast.error('All Fields are required')
+    if (
+      !name ||
+      !description ||
+      !channelImage ||
+      !thumbnail ||
+      !video ||
+      !channel ||
+      !tags ||
+      !level
+    ) {
+      return toast.error("All Fields are required");
     }
 
     const payload = {
-      name, description, channelImage, thumbnail, video, channel, tags, level
-    }
+      name,
+      description,
+      channelImage,
+      thumbnail,
+      video,
+      channel,
+      tags,
+      level,
+    };
 
     try {
-      const { data } = await addCourses(payload)
-      toast.success('Course Created 🎉')
-      console.log(data)
+      if (edit) {
+        payload.id = course._id;
+        const response = await editCourse(payload);
+        toast.success("Course Updated 🎉");
+        router.push(`/courses/${course?._id}`);
+      } else {
+        const response = await addCourses(payload);
+        toast.success("Course Updated 🎉");
+        router.push("/courses");
+      }
     } catch (err) {
-      console.log(err)
-      toast.error(err?.response?.data?.msg)
+      console.log(err);
+      toast.error(err?.response?.data?.msg);
     }
-  }
+  };
 
   return (
     <div className="p-4">
-
       <div className="breadcrumbs mb-4 max-w-5xl mx-auto uppercase font-bold text-xs">
         <ul>
-          <Link href={'/account'}>
-            <li><a>Home</a></li>
+          <Link href={"/account"}>
+            <li>
+              <a>Home</a>
+            </li>
           </Link>
           <Link href={`/courses`}>
-            <li><a>Courses</a></li>
+            <li>
+              <a>Courses</a>
+            </li>
           </Link>
-          {course && <Link href={`/courses/${course?._id}`}>
-            <li><a>{course?.name}</a></li>
-          </Link>
-          }
+          {course && (
+            <Link href={`/courses/${course?._id}`}>
+              <li>
+                <a>{course?.name}</a>
+              </li>
+            </Link>
+          )}
           <li>{course ? "Edit" : "ADD"} Course</li>
         </ul>
       </div>
@@ -57,7 +94,9 @@ export default function EditCourse({ course }) {
       <hr className="my-4 mb-8" />
 
       <header className="max-w-5xl mx-auto mb-4">
-        <h1 className="uppercase font-bold text-xl">{course ? "Edit" : "ADD"} Course</h1>
+        <h1 className="uppercase font-bold text-xl">
+          {course ? "Edit" : "ADD"} Course
+        </h1>
       </header>
       <form onSubmit={handleSubmit} className="max-w-5xl mx-auto space-y-4">
         <div>
@@ -175,8 +214,12 @@ export default function EditCourse({ course }) {
           </div>
         </div>
         <div className="flex items-end justify-end gap-4 py-8">
-          <button className="btn btn-primary">Publish</button>
-          <button className="btn btn-warning">Cancel</button>
+          <button type="submit" className="btn btn-primary">
+            {edit ? "Update" : "Publish"}
+          </button>
+          <button onClick={handleCancel} className="btn btn-warning">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
