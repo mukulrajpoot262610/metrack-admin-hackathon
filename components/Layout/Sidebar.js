@@ -11,6 +11,7 @@ import { logout } from "../../services/api";
 const Sidebar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const path = router.pathname
 
   const handleLogout = async () => {
     try {
@@ -32,7 +33,7 @@ const Sidebar = () => {
           alt=""
           objectFit="contain"
         />
-        <h1 className="font-bold text-white">METrack</h1>
+        <h1 className="font-bold text-white">ME-Track</h1>
       </div>
 
       <ul className="w-full p-3 mt-8 text-base-content menu rounded-box">
@@ -41,7 +42,7 @@ const Sidebar = () => {
         </li>
         <li>
           <Link href="/account" passHref>
-            <a className="flex justify-between">
+            <a className={`flex justify-between ${path === '/account' ? "font-bold bg-[#212121] border border-gray-700" : ""}`}>
               Home
               <i className="fa-solid fa-house"></i>
             </a>
@@ -49,7 +50,7 @@ const Sidebar = () => {
         </li>
         <li>
           <Link href="/users" passHref>
-            <a className="flex justify-between">
+            <a className={`flex justify-between ${path.includes('/users') ? "font-bold bg-[#212121] border border-gray-700" : ""}`}>
               Users
               <i className="fa-solid fa-boxes-stacked"></i>
             </a>
@@ -57,14 +58,14 @@ const Sidebar = () => {
         </li>
         <li>
           <Link href="/courses" passHref>
-            <a className="flex justify-between">
+            <a className={`flex justify-between ${path.includes('/courses') ? "font-bold bg-[#212121] border border-gray-700" : ""}`}>
               Courses
               <i className="fa-solid fa-boxes-stacked"></i>
             </a>
           </Link>
         </li>
         <li>
-          <a className="flex justify-between" onClick={handleLogout}>
+          <a className={`flex justify-between ${path === '/logout' ? "font-bold bg-[#212121] border border-gray-700" : ""}`} onClick={handleLogout}>
             Logout
             <i className="fa-solid fa-power-off"></i>
           </a>

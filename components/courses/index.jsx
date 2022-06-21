@@ -63,7 +63,7 @@ export default function Courses() {
         </ul>
       </div>
 
-      <hr className="my-4 mb-8" />
+      <hr className="my-4 mb-8 border-gray-700" />
 
       <header className="my-2 mb-8 flex justify-between items-end">
         <div className="flex items-center justify-start">

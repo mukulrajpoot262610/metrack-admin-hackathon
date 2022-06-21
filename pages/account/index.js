@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 // import Stats from '../../components/Dashboard/Stats'
-import Header from "../../components/Haeder";
+import Header from "../../components/Header";
 // import { GetStats } from '../../services/api'
 
 const Account = () => {
@@ -25,7 +25,7 @@ const Account = () => {
       <Head>
         <title>Dashboard - MentorMap</title>
       </Head>
-      <div className="w-full h-full mt-20">
+      <div className="w-full h-full">
         <Header />
         {/* {
                     stats && <Stats stats={stats} />
