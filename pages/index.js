@@ -20,8 +20,6 @@ const Login = () => {
   const [toggelFieldType, setToggleFieledType] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const redirect = router.query.redirect;
-
   const onSubmit = async (payload) => {
     setLoading(true);
     try {
@@ -45,7 +43,7 @@ const Login = () => {
         <link rel="icon" href="/images/navbar/logo-alt.png" />
       </Head>
 
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center min-h-screen">
         <img src="404.svg" className="h-64" />
         <div className="flex w-11/12 rounded-lg shadow-lg lg:w-6/12 h-3/5">
           <div className="w-full p-4 lg:p-10">

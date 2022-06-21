@@ -6,52 +6,52 @@ import Sidebar from "./Sidebar";
 import Loader from "./Loader";
 import { useLoadingWithRefresh } from "../../hooks/useLoadingWithRefresh";
 import { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { setAuth } from "../../redux/authSlice";
-import { refresh } from "../../services/api";
+import { useSelector } from "react-redux";
+import Login from "../../pages";
 
 const Layout = ({ children }) => {
   const router = useRouter();
+  const { isAuth } = useSelector(state => state.auth)
   const { loading } = useLoadingWithRefresh();
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await refresh();
-        console.log({ data });
-        dispatch(setAuth(data));
-      } catch (err) {}
-    })();
-  }, []);
+  if (loading) {
+    return (<Loader />)
+  }
 
-  return loading ? (
-    <Loader />
-  ) : (
-    <>
-      {router.pathname !== "/" && <Navbar />}
-      <Toaster />
-      <main className="flex flex-col items-center justify-center w-full">
-        <Head>
-          <title>MentorMap Admin Panel</title>
-        </Head>
-        <div className="flex w-full">
-          {router.pathname !== "/" &&
-            router.pathname !== "/auth/forget-password" && (
-              <div className="hidden w-2/12 lg:block">
-                <Sidebar />
-              </div>
+  if (!isAuth) {
+    (router.pathname.includes('/account') || router.pathname.includes('/courses') || router.pathname.includes('/users')) && router.replace('/')
+    return <Login />
+  }
+
+  if (isAuth) {
+    (router.pathname === '/' && router.replace('/account'))
+    return (
+      <>
+        {router.pathname !== "/" && <Navbar />}
+        <Toaster />
+        <main className="flex flex-col items-center justify-center w-full">
+          <Head>
+            <title>MentorMap Admin Panel</title>
+          </Head>
+          <div className="flex w-full">
+            {router.pathname !== "/" &&
+              router.pathname !== "/auth/forget-password" && (
+                <div className="hidden w-2/12 lg:block">
+                  <Sidebar />
+                </div>
+              )}
+            {router.pathname !== "/" &&
+              router.pathname !== "/auth/forget-password" ? (
+              <div className="w-full mt-16 lg:w-10/12">{children}</div>
+            ) : (
+              <div className="w-full pt-16">{children}</div>
             )}
-          {router.pathname !== "/" &&
-          router.pathname !== "/auth/forget-password" ? (
-            <div className="w-full mt-16 lg:w-10/12">{children}</div>
-          ) : (
-            <div className="w-full pt-16">{children}</div>
-          )}
-        </div>
-      </main>
-    </>
-  );
-};
+          </div>
+        </main>
+      </>
+    )
+
+  }
+}
 
 export default Layout;
