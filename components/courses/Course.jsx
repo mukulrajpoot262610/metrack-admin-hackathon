@@ -21,6 +21,19 @@ export default function Course({ course, loading }) {
     <>
       {
         loading ? <div className="flex justify-center items-center min-h-screen w-full"><LoaderIcon /></div> : <div className="p-4">
+
+          <div className="breadcrumbs mb-4 mx-2 uppercase font-bold text-xs">
+            <ul>
+              <Link href={'/account'}>
+                <li><a>Home</a></li>
+              </Link>
+              <Link href={`/courses`}>
+                <li><a>Courses</a></li>
+              </Link>
+              <li>{course?.name}</li>
+            </ul>
+          </div>
+
           <section className="flex flex-col gap-8 px-4 py-8 border-2 rounded-lg md:flex-row bg-primary bg-opacity-30 border-opacity-40 border-primary">
             <div id="cover" className="flex-1">
               <img src={course?.thumbnail} />

@@ -40,10 +40,16 @@ export default function EditCourse({ course }) {
 
       <div className="breadcrumbs mb-4 max-w-5xl mx-auto uppercase font-bold text-xs">
         <ul>
-          <li><a>Home</a></li>
-          <Link>
+          <Link href={'/account'}>
+            <li><a>Home</a></li>
+          </Link>
+          <Link href={`/courses`}>
             <li><a>Courses</a></li>
           </Link>
+          {course && <Link href={`/courses/${course?._id}`}>
+            <li><a>{course?.name}</a></li>
+          </Link>
+          }
           <li>{course ? "Edit" : "ADD"} Course</li>
         </ul>
       </div>

@@ -52,6 +52,19 @@ export default function Courses() {
 
   return (
     <div className="p-4">
+
+
+      <div className="breadcrumbs mb-4 mx-2 uppercase font-bold text-xs">
+        <ul>
+          <Link href={'/account'}>
+            <li><a>Home</a></li>
+          </Link>
+          <li>Courses</li>
+        </ul>
+      </div>
+
+      <hr className="my-4 mb-8" />
+
       <header className="my-2 mb-8 flex justify-between items-end">
         <div className="flex items-center justify-start">
           <select

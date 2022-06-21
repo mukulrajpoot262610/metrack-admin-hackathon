@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { deleteUser, getUsers } from "../../services/api";
 import { ConfirmAction } from "../fragments/ConfirmAction";
 import Table from "./Table";
+import Link from "next/link";
 
 const Users = () => {
   const [loading, setLoading] = useState(false);
@@ -56,6 +57,17 @@ const Users = () => {
   return (
     <>
       <div id="users" className="p-4">
+
+        <div className="breadcrumbs mb-4 mx-2 uppercase font-bold text-xs">
+          <ul>
+            <Link href={'/account'}>
+              <li><a>Home</a></li>
+            </Link>
+            <li>Users</li>
+          </ul>
+        </div>
+
+        <hr className="my-4 mb-8 border-zinc-700" />
         <div className="flex items-center justify-between mb-4">
           <section>
             <select
