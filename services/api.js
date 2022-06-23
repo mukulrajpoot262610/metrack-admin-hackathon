@@ -28,6 +28,8 @@ export const getCourse = (id) => api.get(`/api/admin/get-course/${id}`);
 export const deleteCourse = (id) => api.delete(`/api/admin/delete-course/${id}`);
 export const addCourses = (data) => api.post("/api/admin/add-courses", data);
 export const editCourses = (data) => api.post("/api/admin/edit-courses", data);
+export const publishCourse = (id) => api.put(`/api/admin/publish-course/${id}`);
+export const unPublishCourse = (id) => api.put(`/api/admin/unpublish-course/${id}`);
 
 api.interceptors.response.use(
   (config) => {

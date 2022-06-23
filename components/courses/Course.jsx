@@ -1,14 +1,17 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import toast, { LoaderIcon } from "react-hot-toast";
-import { deleteCourse } from "../../services/api";
+import { deleteCourse, publishCourse, unPublishCourse } from "../../services/api";
 import { ConfirmAction } from "../fragments/ConfirmAction";
 import Enrolled from "./Enrolled";
 import Stats from "./Stats";
 import { useRouter } from 'next/router'
 
 export default function Course({ course, loading }) {
+
   const [isOpen, setIsOpen] = useState(false);
+  const [isPublish, setIsPublish] = useState(course?.isPublished)
+
   const router = useRouter()
 
   const handleDelete = async (e) => {
@@ -21,6 +24,31 @@ export default function Course({ course, loading }) {
       toast.error(err.response?.data?.msg)
     }
   };
+
+
+  const handlePublish = async (e) => {
+    try {
+      const { data } = await publishCourse(course._id)
+      toast.success('Course Published')
+      setIsPublish(data.data.isPublished)
+    } catch (err) {
+      console.warn(err)
+      toast.error(err.response?.data?.msg)
+    }
+  }
+
+  const handleUnPublish = async (e) => {
+    try {
+      const { data } = await unPublishCourse(course._id)
+      toast.success('Course UnPublished')
+      setIsPublish(data.data.isPublished)
+    } catch (err) {
+      console.warn(err)
+      toast.error(err.response?.data?.msg)
+    }
+  }
+
+  console.log(isPublish)
 
   return (
     <>
@@ -55,7 +83,10 @@ export default function Course({ course, loading }) {
                 <Link href={`/courses/edit?id=${course?._id}`}>
                   <button className="btn btn-warning">edit</button>
                 </Link>
-                <button className="btn btn-primary">publish</button>
+                {
+                  isPublish ? <button className="btn btn-primary" onClick={handleUnPublish}>unpublish</button> : <button className="btn btn-success" onClick={handlePublish}>publish</button>
+                }
+
                 <button onClick={(e) => setIsOpen(true)} className="btn btn-error">
                   delete
                 </button>
