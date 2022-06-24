@@ -20,7 +20,10 @@ const Layout = ({ children }) => {
 
   if (!isAuth) {
     (router.pathname.includes('/account') || router.pathname.includes('/courses') || router.pathname.includes('/users')) && router.replace('/')
-    return <Login />
+    return <>
+      <Toaster />
+      <Login />
+    </>
   }
 
   if (isAuth) {

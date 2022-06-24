@@ -15,6 +15,9 @@ export default function EditCourse({ course }) {
   const [channel, setChannel] = useState(course?.channel)
   const [tags, setTags] = useState(course?.tags.join(","))
   const [level, setLevel] = useState(course?.level)
+  const [category, setCategory] = useState(course?.category)
+  const [domain, setDomain] = useState(course?.domain)
+  const [aboutChannel, setAboutChannel] = useState(course?.aboutChannel)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -24,7 +27,7 @@ export default function EditCourse({ course }) {
     }
 
     const payload = {
-      name, description, channelImage, thumbnail, video, channel, tags, level
+      name, description, channelImage, thumbnail, video, channel, tags, level, aboutChannel, domain, category
     }
 
     try {
@@ -40,7 +43,7 @@ export default function EditCourse({ course }) {
   const handleEdit = async (e) => {
     e.preventDefault()
     const payload = {
-      id: course._id, name, description, channelImage, thumbnail, video, channel, tags, level
+      id: course._id, name, description, channelImage, thumbnail, video, channel, tags, level, aboutChannel, domain, category
     }
 
     try {
@@ -153,17 +156,19 @@ export default function EditCourse({ course }) {
               className="custom-input"
             />
           </div>
-          {/* <div>
-            <label htmlFor="title" className="custom-label">
-              Respect
+          <div>
+            <label htmlFor="about-channel" className="custom-label">
+              About Channel
             </label>
             <input
-              id="title"
-              type="number"
-              placeholder="title"
+              id="about-channel"
+              type="text"
+              value={aboutChannel}
+              onChange={(e) => setAboutChannel(e.target.value)}
+              placeholder="About Channel"
               className="custom-input"
             />
-          </div> */}
+          </div>
           <div>
             <label htmlFor="tags" className="custom-label">
               Tags (comma separated)
@@ -191,6 +196,42 @@ export default function EditCourse({ course }) {
               <option value="2">Advanced</option>
             </select>
           </div>
+
+          <div>
+            <label htmlFor="domain" className="custom-label">
+              Domain
+            </label>
+            <select
+              className="w-full select select-bordered custom-input"
+              value={domain}
+              onChange={(e) => setDomain(e.target.value)}
+            >
+              <option value="web">Web Development</option>
+              <option value="mobile">Mobile Development</option>
+              <option value="web3">Web3.0 Development</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="category" className="custom-label">
+              Categories
+            </label>
+            <select
+              className="w-full select select-bordered custom-input"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="htmlcss">HTML/CSS</option>
+              <option value="javascript">Javascript</option>
+              <option value="react">React</option>
+              <option value="vue">Vue</option>
+              <option value="angular">Angular</option>
+              <option value="node">Node</option>
+              <option value="python">Python</option>
+              <option value="django">Django</option>
+              <option value="flutter">Flutter</option>
+            </select>
+          </div>
+
         </div>
         <div className="flex items-end justify-end gap-4 py-8">
           <button type="submit" className="btn btn-primary">Save</button>
