@@ -31,6 +31,12 @@ export const editCourses = (data) => api.post("/api/admin/edit-courses", data);
 export const publishCourse = (id) => api.put(`/api/admin/publish-course/${id}`);
 export const unPublishCourse = (id) => api.put(`/api/admin/unpublish-course/${id}`);
 
+// CHANNELS
+export const getChannels = () => api.get("/api/admin/get-all-channel");
+export const getChannel = (id) => api.get(`/api/admin/get-channel/${id}`);
+export const addChannel = (data) => api.post("/api/admin/add-channel", data);
+
+
 api.interceptors.response.use(
   (config) => {
     return config;

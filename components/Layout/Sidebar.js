@@ -66,6 +66,14 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
+          <Link href="/channels" passHref>
+            <a className={`flex justify-between ${path.includes('/channels') ? "font-bold bg-[#212121] border border-gray-700" : ""}`}>
+              Channels
+              <i className="fa-solid fa-boxes-stacked"></i>
+            </a>
+          </Link>
+        </li>
+        <li>
           <a className={`flex justify-between ${path === '/logout' ? "font-bold bg-[#212121] border border-gray-700" : ""}`} onClick={handleLogout}>
             Logout
             <i className="fa-solid fa-power-off"></i>
