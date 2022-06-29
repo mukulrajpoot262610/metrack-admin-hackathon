@@ -11,30 +11,35 @@ import Login from "../../pages";
 
 const Layout = ({ children }) => {
   const router = useRouter();
-  const { isAuth } = useSelector(state => state.auth)
+  const { isAuth } = useSelector((state) => state.auth);
   const { loading } = useLoadingWithRefresh();
 
   if (loading) {
-    return (<Loader />)
+    return <Loader />;
   }
 
   if (!isAuth) {
-    (router.pathname.includes('/account') || router.pathname.includes('/courses') || router.pathname.includes('/users')) && router.replace('/')
-    return <>
-      <Toaster />
-      <Login />
-    </>
+    (router.pathname.includes("/account") ||
+      router.pathname.includes("/courses") ||
+      router.pathname.includes("/users")) &&
+      router.replace("/");
+    return (
+      <>
+        <Toaster />
+        <Login />
+      </>
+    );
   }
 
   if (isAuth) {
-    (router.pathname === '/' && router.replace('/account'))
+    router.pathname === "/" && router.replace("/account");
     return (
       <>
         {router.pathname !== "/" && <Navbar />}
         <Toaster />
         <main className="flex flex-col items-center justify-center w-full">
           <Head>
-            <title>MentorMap Admin Panel</title>
+            <title>Metrack Admin Panel</title>
           </Head>
           <div className="flex w-full">
             {router.pathname !== "/" &&
@@ -44,7 +49,7 @@ const Layout = ({ children }) => {
                 </div>
               )}
             {router.pathname !== "/" &&
-              router.pathname !== "/auth/forget-password" ? (
+            router.pathname !== "/auth/forget-password" ? (
               <div className="w-full mt-16 lg:w-10/12">{children}</div>
             ) : (
               <div className="w-full pt-16">{children}</div>
@@ -52,9 +57,8 @@ const Layout = ({ children }) => {
           </div>
         </main>
       </>
-    )
-
+    );
   }
-}
+};
 
 export default Layout;
